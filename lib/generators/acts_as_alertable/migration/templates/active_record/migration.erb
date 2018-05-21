@@ -1,0 +1,15 @@
+class ActsAsAlertableMigration < ActiveRecord::Migration<%= migration_version %>
+  def change
+    create_table :alerts do |t|
+      t.integer :severity
+      t.text :message
+      t.datetime :start_date
+      t.datetime :end_date
+      t.integer :alertable_id
+      t.string :alertable_type
+
+      t.timestamps
+    end
+    add_index :alerts, [:alertable_id, :alertable_type]
+  end
+end
